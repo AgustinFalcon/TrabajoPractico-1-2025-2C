@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Primer Trabajo 2do C</string>
+    <string name="btn_register">Registrate</string>
+    <string name="registro">Registro</string>
 </resources>
