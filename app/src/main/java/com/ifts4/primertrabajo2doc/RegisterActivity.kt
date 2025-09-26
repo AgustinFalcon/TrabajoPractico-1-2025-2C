@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import com.ifts4.primertrabajo2doc.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*val name = intent.getStringExtra("userName") //""
+        /*val name = intent.getStringExtra("userName")
         val age = intent.getIntExtra("userAge", 0)
 
         binding.textViewWelcome.text = "Hola $name, $age"*/
@@ -33,9 +34,11 @@ class RegisterActivity : AppCompatActivity() {
             val preferences = getSharedPreferences(CREDENCIALES, MODE_PRIVATE)
             val edit = preferences.edit()
 
-            edit.putString("userName", name)
-            edit.putString("email", email)
-            edit.putString("password", password)
+            val user = User(name = name, email = email, password = password)
+            val gson = Gson()
+
+            val userInJsonFormat = gson.toJson(user)
+            edit.putString("userData", userInJsonFormat)
 
             edit.apply()
             goToMainActivity()

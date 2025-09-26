@@ -1,10 +1,9 @@
 package com.ifts4.primertrabajo2doc.ejercicio2
 
+import com.ifts4.primertrabajo2doc.ejercicio1.Auto
+
 fun main() {
-
-    try {
-
-    } catch (e: Exception){}
+    val auto = Auto()
 }
 
 
