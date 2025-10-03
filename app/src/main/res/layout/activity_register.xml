@@ -50,6 +50,23 @@
         android:hint="Introduzaca su password"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail"/>
 
+    <TextView
+        android:id="@+id/textViewSelectColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/seleccione_un_color"
+        android:layout_marginTop="24dp"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"/>
+
+    <Spinner
+        android:id="@+id/selectColorSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSelectColor"/>
+
 
     <Button
         android:id="@+id/btnRegister"
@@ -61,7 +78,7 @@
         android:padding="18dp"
         android:textSize="22sp"
         android:text="@string/btn_register"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@+id/selectColorSpinner"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
 

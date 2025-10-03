@@ -21,9 +21,10 @@ class MainActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_main)
         setContentView(binding.root)
 
-        val editTextName = findViewById<EditText>(R.id.editTextName)
-        val editTextAge = findViewById<EditText>(R.id.editTextAge)
+        val editTextName = findViewById<EditText>(R.id.editTextUser)
+        val editTextAge = findViewById<EditText>(R.id.editTextPassword)
         val butonLogin = findViewById<Button>(R.id.butonLogin)
+
 
         //butonLogin.setOnClickListener{}
         binding.butonLogin.setOnClickListener {
@@ -49,6 +50,14 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("CiclosDeVida", "onResume()")
+        val preferences = getSharedPreferences(RegisterActivity.CREDENCIALES, MODE_PRIVATE)
+        val autoLogin = preferences.getBoolean("autoLogin", false)
+
+        Toast.makeText(this, "autoLogin={$autoLogin}", Toast.LENGTH_SHORT).show()
+        if (autoLogin == true) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onPause() {
@@ -68,8 +77,8 @@ class MainActivity : AppCompatActivity() {
 
 
     fun validateData() {
-        val nameBinding = binding.editTextName.text.toString()
-        val ageBinding = binding.editTextAge.text.toString()
+        val nameBinding = binding.editTextUser.text.toString()
+        val ageBinding = binding.editTextPassword.text.toString()
 
         val preferences = getSharedPreferences(RegisterActivity.CREDENCIALES, MODE_PRIVATE)
         val userInJsonFormat = preferences.getString("userData", null)
@@ -79,12 +88,15 @@ class MainActivity : AppCompatActivity() {
 
         try {
             if (nameBinding == user.name && ageBinding == user.password) {
-                // mensaje bienvenido
-                //Toast.makeText(this, "Bienvenido/a $nameBinding", Toast.LENGTH_LONG).show()
-                //val intent = Intent(this, RegisterActivity::class.java)
-                //intent.putExtra("userName", nameBinding)
-                //intent.putExtra("userAge", ageBinding.toInt())
-                //startActivity(intent)
+                val checkbox: Boolean = binding.checkboxAutoLogin.isChecked
+                val preferences = getSharedPreferences(RegisterActivity.CREDENCIALES, MODE_PRIVATE)
+                val edit = preferences.edit()
+
+                edit.putBoolean("autoLogin", checkbox)
+                edit.apply()
+
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
                 Toast.makeText(this, "CORRECTO!", Toast.LENGTH_LONG).show()
 
             } else {
