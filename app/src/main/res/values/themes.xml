@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.PrimerTrabajo2doC" parent="Base.Theme.PrimerTrabajo2doC" />
+
+
+    <style name="Theme.Toolbar" parent="MaterialAlertDialog.Material3"
+        />
 </resources>
