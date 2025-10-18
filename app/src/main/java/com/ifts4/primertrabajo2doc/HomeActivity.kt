@@ -1,9 +1,11 @@
 package com.ifts4.primertrabajo2doc
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -13,7 +15,7 @@ import com.google.android.material.navigation.NavigationView
 import com.ifts4.primertrabajo2doc.databinding.ActivityHomeBinding
 import com.ifts4.primertrabajo2doc.fragments.FirstFragment
 import com.ifts4.primertrabajo2doc.fragments.SecondFragment
-import com.ifts4.primertrabajo2doc.fragments.ThirdFragment
+import com.ifts4.primertrabajo2doc.fragments.third.ThirdFragment
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -58,6 +60,20 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }*/
+
+        // Nuevo manejo del botón "Atrás"
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                } else {
+                    Toast.makeText(this@HomeActivity, "Acción de retroceso deshabilitada", Toast.LENGTH_SHORT).show()
+                    // Si quisieras permitir salir en algún caso, podrías usar:
+                    //isEnabled = false
+                    // onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        })
     }
 
     private fun replaceFragment(fragment: Fragment) {
@@ -87,4 +103,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    /*override fun onBackPressed() {
+        // Si el drawer está abierto, solo lo cierra
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            Toast.makeText(this, "Acción de retroceso deshabilitada", Toast.LENGTH_SHORT).show()
+        }
+    }*/
 }

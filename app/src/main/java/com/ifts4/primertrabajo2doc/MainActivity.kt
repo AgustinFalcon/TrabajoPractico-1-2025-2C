@@ -14,6 +14,10 @@ import com.ifts4.primertrabajo2doc.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private val prefs by lazy {
+        getSharedPreferences(RegisterActivity.CREDENCIALES, MODE_PRIVATE)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

@@ -52,4 +52,8 @@ dependencies {
 
     // Gson
     implementation("com.google.code.gson:gson:2.13.2")
+
+    // viewModels()
+    implementation("androidx.fragment:fragment-ktx:1.8.9")
+    implementation ("androidx.activity:activity-ktx:1.11.0")
 }
